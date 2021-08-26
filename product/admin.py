@@ -1,11 +1,22 @@
 from django.contrib import admin
 from product.models import Product
 from apitest.models import Apis
-# Register your models here.
+from apptest.models import Appcase
+'''
+TabularInline: 这个主要是横向的以表格的形式展示/添加数据 
+StackedInline: 这个主要是纵向的形式展示/添加数据
+'''
+
+
+class AppcaseAdmin(admin.ModelAdmin):
+    list_display = ['appcasename', 'apptestresult', 'create_time', 'id', 'product']
+    model = Appcase
+    extra = 1
 
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['productname', 'productdesc', 'producter', 'create_time', 'id']
+    inlines = [AppcaseAdmin]
 
 
 class ApisAdmin(admin.TabularInline):
